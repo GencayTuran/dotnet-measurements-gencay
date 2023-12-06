@@ -1,4 +1,5 @@
-﻿using ABB.Interview.API.Measurements.Models;
+﻿using ABB.Interview.API.Helpers;
+using ABB.Interview.API.Measurements.Models;
 using ABB.Interview.API.Services.Interfaces;
 using Newtonsoft.Json;
 
@@ -22,7 +23,7 @@ namespace ABB.Interview.API.Services
         {
             return await Task.Run(() =>
             {
-                Dictionary<string, MeasurementModel> measurementsDict = measurements.ToDictionary(m => m.ResourceId, StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, MeasurementModel> measurementsDict = measurements.ToDictionary(m => HashKeyHelper.GetHashKey(m), StringComparer.OrdinalIgnoreCase);
                 return measurementsDict;
             });
         }
