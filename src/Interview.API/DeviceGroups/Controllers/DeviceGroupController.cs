@@ -11,20 +11,16 @@ namespace ABB.Interview.API.DeviceGroups.Controllers;
 public class DeviceGroupController : ControllerBase
 {
     private readonly ILogger<DeviceGroupController> _logger;
-    private readonly IDataHandlerService _service;
     private readonly IDeviceGroupManager _manager;
 
     public DeviceGroupController(
         ILogger<DeviceGroupController> logger,
-        IDeviceGroupManager manager,
-        IDataHandlerService service)
+        IDeviceGroupManager manager)
     {
         Guard.Against.Null(logger);
-        Guard.Against.Null(service);
         Guard.Against.Null(manager);
 
         _logger = logger;
-        _service = service;
         _manager = manager;
     }
 
@@ -35,8 +31,7 @@ public class DeviceGroupController : ControllerBase
 
         try
         {
-            var measurements = await _service.RetrieveData();
-            List<DeviceGroupListModel> response = await _manager.HandleDeviceGroups(measurements);
+            List<DeviceGroupListModel> response = await _manager.HandleGroups();
         }
         catch (Exception)
         {

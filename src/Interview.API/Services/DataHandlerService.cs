@@ -1,13 +1,30 @@
-﻿using ABB.Interview.API.Services.Interfaces;
+﻿using ABB.Interview.API.Measurements.Models;
+using ABB.Interview.API.Services.Interfaces;
+using Newtonsoft.Json;
 
 namespace ABB.Interview.API.Services
 {
     public class DataHandlerService : IDataHandlerService
     {
-        public Task<Dictionary<string, Dictionary<string, string>>> RetrieveData()
+        private string filePath = Path.Combine(Directory.GetCurrentDirectory(), "data", "measurements.json");
+
+        public async Task<List<MeasurementModel>> RetrieveData()
         {
-            throw new NotImplementedException();
+            return await Task.Run(() =>
+            {
+                var jsonData = File.ReadAllText(filePath);
+                List<MeasurementModel> measurements = JsonConvert.DeserializeObject<List<MeasurementModel>>(jsonData);
+                return measurements;
+            });
         }
 
+        public async Task<Dictionary<string, MeasurementModel>> DataToDictionary(List<MeasurementModel> measurements)
+        {
+            return await Task.Run(() =>
+            {
+                Dictionary<string, MeasurementModel> measurementsDict = measurements.ToDictionary(m => m.ResourceId, StringComparer.OrdinalIgnoreCase);
+                return measurementsDict;
+            });
+        }
     }
 }

@@ -13,12 +13,10 @@ namespace ABB.Interview.API.Devices.Controllers;
 public class DeviceController : ControllerBase
 {
     private readonly ILogger<DeviceController> _logger;
-    private readonly IDataHandlerService _service;
     private readonly IDeviceListManager _manager;
 
     public DeviceController(
         ILogger<DeviceController> logger,
-        IDataHandlerService service,
         IDeviceListManager manager)
     {
         Guard.Against.Null(logger);
@@ -26,7 +24,6 @@ public class DeviceController : ControllerBase
         Guard.Against.Null(logger);
 
         _logger = logger;
-        _service = service;
         _manager = manager;
     }
 
@@ -37,8 +34,7 @@ public class DeviceController : ControllerBase
 
         try
         {
-            var measurements = await _service.RetrieveData();
-            List<DeviceListModel> response = await _manager.HandleDevices(measurements);
+            List<DeviceListModel> response = await _manager.HandleDevices();
         }
         catch (Exception)
         {

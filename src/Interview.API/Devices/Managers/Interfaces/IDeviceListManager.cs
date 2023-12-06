@@ -4,6 +4,6 @@ namespace ABB.Interview.API.Devices.Managers.Interfaces
 {
     public interface IDeviceListManager
     {
-        Task<List<DeviceListModel>> HandleDevices(Dictionary<string,Dictionary<string,string>> measurements);
+        Task<List<DeviceListModel>> HandleDevices();
     }
 }
