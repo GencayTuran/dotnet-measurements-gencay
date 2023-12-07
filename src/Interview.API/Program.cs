@@ -16,16 +16,14 @@ namespace ABB.Interview.API
             // Add services to the container.
             builder.Services.AddTransient<IDeviceListManager, DeviceListManager>();
             builder.Services.AddTransient<IDeviceGroupManager, DeviceGroupManager>();
-            builder.Services.AddScoped<IDataHandlerService, DataHandlerService>();
+            builder.Services.AddSingleton<IDataHandlerService, DataHandlerService>();
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

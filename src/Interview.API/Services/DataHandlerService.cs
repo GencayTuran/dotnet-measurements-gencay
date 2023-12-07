@@ -11,21 +11,15 @@ namespace ABB.Interview.API.Services
 
         public async Task<List<MeasurementModel>> RetrieveData()
         {
-            return await Task.Run(() =>
-            {
-                var jsonData = File.ReadAllText(filePath);
-                List<MeasurementModel> measurements = JsonConvert.DeserializeObject<List<MeasurementModel>>(jsonData);
-                return measurements;
-            });
+            var jsonData = File.ReadAllText(filePath);
+            List<MeasurementModel> measurements = JsonConvert.DeserializeObject<List<MeasurementModel>>(jsonData);
+            return measurements;
         }
 
         public async Task<Dictionary<string, MeasurementModel>> DataToDictionary(List<MeasurementModel> measurements)
         {
-            return await Task.Run(() =>
-            {
-                Dictionary<string, MeasurementModel> measurementsDict = measurements.ToDictionary(m => HashKeyHelper.GetHashKey(m), StringComparer.OrdinalIgnoreCase);
-                return measurementsDict;
-            });
+            Dictionary<string, MeasurementModel> measurementsDict = measurements.ToDictionary(m => HashKeyHelper.GetHashKey(m), StringComparer.OrdinalIgnoreCase);
+            return measurementsDict;
         }
     }
 }
