@@ -31,11 +31,13 @@ namespace Interview.API.Test.Tests
         public async Task HandleGroups_ShouldReturn_ListOfDeviceGroupListModel()
         {
             var mockMeasurements = new DataHandlerServiceMock().GetData();
+            var mockDictionary = new DataHandlerServiceMock().GetDictionaryFromData();
 
             //arrange
             _mockService.Setup(service => service.RetrieveData())
-                             .ReturnsAsync(mockMeasurements); 
-
+                .ReturnsAsync(mockMeasurements);
+            _mockService.Setup(service => service.DataToDictionary(mockMeasurements))
+                .ReturnsAsync(mockDictionary);
             //act
             List<DeviceGroupListModel> result = await _manager.ManageDeviceGroups();
 
