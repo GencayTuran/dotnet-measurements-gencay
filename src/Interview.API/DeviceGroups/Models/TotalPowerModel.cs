@@ -2,15 +2,27 @@
 {
     public class TotalPowerModel
     {
-        public double Min { get; set; }
-        public double Max { get; set; }
-        public double Avg { get; set; }
+        private double _min;
+        private double _max;
+        private double _avg;
 
-        public TotalPowerModel(double min, double max, double avg)
+        public double Min
         {
-            Min = Math.Round(min, 4);
-            Max = Math.Round(max, 4);
-            Avg = Math.Round(avg, 4);
+            get => _min;
+            set => _min = Math.Round(value, 4);
+        }
+
+        public double Max
+        {
+            get => _max;
+            set => _max = Math.Round(value, 4);
+        }
+
+        public double Avg
+        {
+            get => _avg;
+            set => _avg = Math.Round(value, 4);
         }
     }
+
 }

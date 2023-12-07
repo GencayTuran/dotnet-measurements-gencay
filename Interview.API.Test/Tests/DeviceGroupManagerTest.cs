@@ -44,7 +44,7 @@ namespace Interview.API.Test.Tests
         }
 
         [TestMethod]
-        public async Task HandleGroups_RetrieveData_ReturnsNull_ShouldThrow_Exception()
+        public async Task HandleGroups_RetrieveData_ReturnsEmpty_ShouldThrow_Exception()
         {
             var mockMeasurements = new DataHandlerServiceMock().GetData();
 
@@ -53,7 +53,26 @@ namespace Interview.API.Test.Tests
                              .ReturnsAsync(new List<MeasurementModel>());
 
             //assert
-            await Assert.ThrowsExceptionAsync<Exception>(async()  => await _manager.MapDeviceGroups());
+            await Assert.ThrowsExceptionAsync<Exception>(async () => await _manager.MapDeviceGroups());
+        }
+
+        [TestMethod]
+        public async Task HandleGroups_ReturnObject_IsValid()
+        {
+            //arrange
+            var mockMeasurements = new DataHandlerServiceMock().GetData();
+            var mockDictionary = new DataHandlerServiceMock().GetDictionaryFromData();
+
+            _mockService.Setup(service => service.RetrieveData())
+                             .ReturnsAsync(mockMeasurements);
+            _mockService.Setup(service => service.DataToDictionary(mockMeasurements))
+                .ReturnsAsync(mockDictionary);
+
+            //act
+            var result = await _manager.MapDeviceGroups();
+
+            //assert
+            Assert.AreEqual(2, result.Count);
         }
     }
 }

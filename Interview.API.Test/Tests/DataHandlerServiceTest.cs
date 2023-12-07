@@ -48,5 +48,15 @@ namespace Interview.API.Test.Tests
             Assert.IsNotNull(measurementsDict);
             Assert.AreEqual(measurementsDict.Count, mockMeasurements.Count());
         }
+
+        [TestMethod]
+        public async Task DataToDictionary_WithDuplicateValues_ShouldThrow_ArgumentException()
+        {
+            // arrange
+            List<MeasurementModel> mockMeasurements = new DataHandlerServiceMock().GetData_WithDuplicateValues();
+
+            // assert
+            await Assert.ThrowsExceptionAsync<ArgumentException>(async () => await _dataHandlerService.DataToDictionary(mockMeasurements));
+        }
     }
 }
