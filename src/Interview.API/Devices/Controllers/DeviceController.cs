@@ -31,17 +31,18 @@ public class DeviceController : ControllerBase
     public async Task<IActionResult> Get(CancellationToken cancellationToken)
     {
         await Task.Delay(1000, cancellationToken);
+        _logger.LogInformation("Triggered api/devices.");
 
+        List<DeviceListModel> deviceList = new();
         try
         {
-            List<DeviceListModel> response = await _manager.HandleDevices();
+            deviceList = await _manager.ManageDeviceList();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-
-            throw;
+            _logger.LogError(ex, $"An error occurred while processing the request.\n {ex.Message}");
+            return StatusCode(500, $"An error occurred while processing the request.\n {ex.Message}");
         }
-
-        return Ok(Array.Empty<DeviceListModel>());
+        return Ok(deviceList);
     }
 }

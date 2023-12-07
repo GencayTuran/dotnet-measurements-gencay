@@ -2,9 +2,9 @@
 {
     public class PowerListModel
     {
-        public double Min { get; set; }
-        public double Max { get; set; }
-        public double Avg { get; set; }
+        public decimal Min { get; set; }
+        public decimal Max { get; set; }
+        public decimal Avg { get; set; }
         public long Timestamp { get; set; }
     }
 }

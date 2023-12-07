@@ -37,7 +37,7 @@ namespace Interview.API.Test.Tests
                              .ReturnsAsync(mockMeasurements); 
 
             //act
-            List<DeviceGroupListModel> result = await _manager.MapDeviceGroups();
+            List<DeviceGroupListModel> result = await _manager.ManageDeviceGroups();
 
             //assert
             Assert.IsNotNull(result);
@@ -53,7 +53,7 @@ namespace Interview.API.Test.Tests
                              .ReturnsAsync(new List<MeasurementModel>());
 
             //assert
-            await Assert.ThrowsExceptionAsync<Exception>(async () => await _manager.MapDeviceGroups());
+            await Assert.ThrowsExceptionAsync<Exception>(async () => await _manager.ManageDeviceGroups());
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace Interview.API.Test.Tests
                 .ReturnsAsync(mockDictionary);
 
             //act
-            var result = await _manager.MapDeviceGroups();
+            var result = await _manager.ManageDeviceGroups();
 
             //assert
             Assert.AreEqual(2, result.Count);

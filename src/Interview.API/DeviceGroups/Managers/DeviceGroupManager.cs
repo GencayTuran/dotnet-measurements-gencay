@@ -22,7 +22,7 @@ namespace ABB.Interview.API.DeviceGroups.Managers
             _logger = logger;
             _service = service;
         }
-        public async Task<List<DeviceGroupListModel>> MapDeviceGroups()
+        public async Task<List<DeviceGroupListModel>> ManageDeviceGroups()
         {
             List<DeviceGroupListModel> deviceGroups = new();
 

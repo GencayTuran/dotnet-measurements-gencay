@@ -27,18 +27,18 @@ public class DeviceGroupController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get(CancellationToken cancellationToken)
     {
-        await Task.Delay(1000, cancellationToken);
-        _logger.LogInformation("Getting api/groups.");
+        //await Task.Delay(1000, cancellationToken);
+        _logger.LogInformation("Triggered api/groups.");
 
-        List<DeviceGroupListModel> deviceGroups;
+        List<DeviceGroupListModel> deviceGroups = new();
         try
         {
-            deviceGroups = await _manager.MapDeviceGroups();
+            deviceGroups = await _manager.ManageDeviceGroups();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while processing the request.");
-            return StatusCode(500, "An error occurred while processing the request.");
+            _logger.LogError(ex, $"An error occurred while processing the request.\n{ex.Message}");
+            return StatusCode(500, $"An error occurred while processing the request.\n{ex.Message}");
         }
         return Ok(deviceGroups);
     }
