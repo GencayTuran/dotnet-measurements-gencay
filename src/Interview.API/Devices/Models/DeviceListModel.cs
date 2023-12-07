@@ -2,7 +2,7 @@
 
 public class DeviceListModel
 {
-    private decimal _maxPower;
+    private double _maxPower;
     private string _deviceId;
     
     public string DeviceId
@@ -12,7 +12,7 @@ public class DeviceListModel
     }
     public string Group { get; set; }
     public string Direction { get; set; }
-    public decimal MaxPower
+    public double MaxPower
     {
         get => _maxPower;
         set => _maxPower = Math.Round(value, 4);

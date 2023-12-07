@@ -2,23 +2,23 @@
 {
     public class TotalPowerModel
     {
-        private decimal _min;
-        private decimal _max;
-        private decimal _avg;
+        private double _min;
+        private double _max;
+        private double _avg;
 
-        public decimal Min
+        public double Min
         {
             get => _min;
             set => _min = Math.Round(value, 4);
         }
 
-        public decimal Max
+        public double Max
         {
             get => _max;
             set => _max = Math.Round(value, 4);
         }
 
-        public decimal Avg
+        public double Avg
         {
             get => _avg;
             set => _avg = Math.Round(value, 4);
